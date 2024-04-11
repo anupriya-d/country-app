@@ -1,0 +1,48 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Country Information Project",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Country Info",
+      "description": "API for Calculus in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/country/{countryName}": {
+      "get": {
+        "tags": ["Information Service"],
+        "summary": "Get information about a specific country",
+        "parameters": [
+          {
+            "name": "countryName",
+            "in": "path",
+            "description": "Name of the country",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            
+            "description": "This service allows you to get information of given country"
+          },
+          "404": {
+            "description": "Country not found"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Country Info</title>
+</head>
+
+<body>
+
+    <section id="c-cover">
+
+    <div>
+        <h1>Find Your Country Information </h1>
+
+    </div>
+
+    <div>
+        <label for="country-name">Enter Country Name Here</label>
+        <input type="text" id="country-name" placeholder="Ex : New zealand">
+
+        <button onclick="getCountryInfo()">Find Info</button>
+    </div>
+
+    <div>
+        <!-- Information will be displayed Here-->
+        <h2> Country Information</h2>
+        <h3 id="c-name"></h3>
+        <h3 id="c-capital"></h3>
+        <h3 id="c-population"></h3>
+        <h3 id="c-region"></h3>
+    </div>
+</section>
+    <script>
+        //front-end script to get infomation and fetching from back-end
+        async function getCountryInfo() {
+
+            const countryName = document.getElementById('country-name').value;
+
+            try {
+                const response = await fetch(`/country/${countryName}`)
+                const data = await response.json();
+
+                if (data.success) {
+                    const countryData = data.countryData[0];
+                    document.getElementById('c-name').innerHTML = `Name : ${countryData.name.common}`;
+                    document.getElementById('c-capital').innerHTML = `Capital: ${countryData.capital}`;
+                    document.getElementById('c-population').innerHTML = `Population : ${countryData.population.toLocaleString()}`;
+                    document.getElementById('c-region').innerHTML = `Region: ${countryData.region}`;
+                }
+                else {
+                    alert('Country Not Found !');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('Error FetchingData');
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
